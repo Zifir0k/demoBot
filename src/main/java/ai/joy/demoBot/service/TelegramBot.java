@@ -3,6 +3,7 @@ package ai.joy.demoBot.service;
 import ai.joy.demoBot.config.BotConfig;
 import ai.joy.demoBot.model.User;
 import ai.joy.demoBot.model.UserRepository;
+import com.vdurmont.emoji.EmojiParser;
 import lombok.extern.slf4j.Slf4j;
 import org.glassfish.grizzly.http.util.TimeStamp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,7 +101,9 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     protected void startCommandReceived(long chatId, String name){
-        String answer = "Привет, " + name + " и Добро пожаловать!";
+
+        String answer = EmojiParser.parseToUnicode("Привет, " + name + " и Добро пожаловать!" + ":coffin:");
+        //String answer = "Привет, " + name + " и Добро пожаловать!";
         log.info("replied to the user: " + name);
         sendMessage(chatId,answer);
     }
